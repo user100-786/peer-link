@@ -4,6 +4,7 @@ import 'package:peerlink/screens/login_screen/login_form.dart';
 import 'package:peerlink/screens/sign_up_screen/sign_up_screen.dart';
 
 class Login extends StatefulWidget {
+  static bool isLoginPressed = true;
   const Login({super.key});
 
   //  Function(bool) toggleLoginState=?;
@@ -14,14 +15,13 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-bool isLoginPressed = true;
 
 class _LoginState extends State<Login> with TickerProviderStateMixin {
   // bool isLoginPressed = true;
 
   void toggleIsLoginPressed() {
     setState(() {
-      isLoginPressed = !isLoginPressed;
+      Login.isLoginPressed = !Login.isLoginPressed;
     });
   }
 
@@ -60,13 +60,13 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                 child: TextButton(
                   onPressed: () {
                     setState(() {
-                      isLoginPressed = true; // Set the Login button as pressed
+                      Login.isLoginPressed = true; // Set the Login button as pressed
                     });
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateColor.resolveWith(
                       (states) {
-                        if (isLoginPressed) {
+                        if (Login.isLoginPressed) {
                           return Colors.orange;
                         }
                         return Colors.white;
@@ -81,7 +81,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                   child: Text(
                     "Log In",
                     style: TextStyle(
-                      color: isLoginPressed ? Colors.white : Colors.orange,
+                      color: Login.isLoginPressed ? Colors.white : Colors.orange,
                     ),
                   ),
                 ),
@@ -91,14 +91,14 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                 child: TextButton(
                   onPressed: () {
                     setState(() {
-                      isLoginPressed =
+                      Login.isLoginPressed =
                           false; // Set the Login button as not pressed
                     });
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateColor.resolveWith(
                       (states) {
-                        if (!isLoginPressed) {
+                        if (!Login.isLoginPressed) {
                           return Colors.orange;
                         }
                         return Colors.white;
@@ -113,7 +113,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                   child: Text(
                     "Sign Up",
                     style: TextStyle(
-                      color: !isLoginPressed ? Colors.white : Colors.orange,
+                      color: !Login.isLoginPressed ? Colors.white : Colors.orange,
                     ),
                   ),
                 ),
@@ -129,7 +129,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
         // if (isLoginPressed) LoginForm();
         // else {SignupForm(),}
 
-        isLoginPressed ? const LoginForm() : SignupForm(),
+        Login.isLoginPressed ? const LoginForm() : SignupForm(),
       ],
     );
   }

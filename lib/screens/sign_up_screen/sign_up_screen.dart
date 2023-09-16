@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:peerlink/screens/login_screen/login_form.dart';
 
+import '../login_screen/login_screen.dart';
+import '../login_screen/static_screen.dart';
+
 // import '../login_screen/login_screen.dart';
 
 class SignupForm extends StatefulWidget {
@@ -107,11 +110,15 @@ class _SignupFormState extends State<SignupForm> {
                 children: [
                   const Text("Already have an Account?"),
                   TextButton(
-                    onPressed: () {
-                      setState(() {
-                        loginbutton = !loginbutton;
-                      });
-                    },
+                    onPressed:() {
+                        setState(() {
+                          Login.isLoginPressed = true;
+                          setState(() {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> const Static()));
+                          });
+                        });
+                      },
+
                     child: const Text("Sign in"),
                   )
                 ],

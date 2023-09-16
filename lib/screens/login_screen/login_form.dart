@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peerlink/screens/login_screen/login_screen.dart';
+import 'package:peerlink/screens/login_screen/static_screen.dart';
 import 'package:peerlink/screens/sign_up_screen/sign_up_screen.dart';
 
 class LoginForm extends StatefulWidget {
@@ -108,10 +109,13 @@ class _LoginFormState extends State<LoginForm> {
                     child: TextButton(
                       onPressed: () {
                         setState(() {
-                          signupbutton = !signupbutton;
+                          Login.isLoginPressed = false;
+                          setState(() {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> const Static()));
+                          });
                         });
                       },
-                      child: const Text("Signup"),
+                      child: const Text("Sign Up"),
                     ),
                   ),
                   // Login()
