@@ -1,37 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:peerlink/screens/login_screen/login_form.dart';
+import 'package:peerlink/screens/login_screen/login_screen.dart';
+import 'package:peerlink/screens/sign_up_screen/sign_up_screen.dart';
 
-// import '../login_screen/login_screen.dart';
-
-class SignupForm extends StatefulWidget {
-  SignupForm({super.key});
-  // bool isloginpressed;
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
 
   @override
-  State<SignupForm> createState() => _SignupFormState();
+  State<LoginForm> createState() => _LoginFormState();
 }
 
-bool loginbutton = false;
+bool signupbutton = false;
 
-class _SignupFormState extends State<SignupForm> {
+class _LoginFormState extends State<LoginForm> {
   TextEditingController _idtextController = TextEditingController();
   TextEditingController _passtextController = TextEditingController();
-  TextEditingController _conpass_textController = TextEditingController();
+
   FocusNode _focusNode = FocusNode();
 
   @override
   void dispose() {
     _idtextController.dispose();
     _passtextController.dispose();
-    _conpass_textController.dispose();
     _focusNode.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return 
-         Column(
+    // Login log = Login();
+
+    return  Column(
             children: [
               const SizedBox(
                 height: 10,
@@ -63,20 +61,19 @@ class _SignupFormState extends State<SignupForm> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-                child: TextFormField(
-                  controller: _conpass_textController,
-                  // focusNode: _focusNode,
-                  decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      hintText: "Confirm Your Password"),
-                  // enabled: true,
-                  // keyboardType: TextInputType.text,
+                padding: const EdgeInsets.fromLTRB(150, 20, 10, 50),
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Forgot Password?",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 121, 119, 119),
+                    ),
+                  ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: SizedBox(
                     width: 210,
                     height: 45,
@@ -95,7 +92,7 @@ class _SignupFormState extends State<SignupForm> {
                         ),
                       ),
                       child: const Text(
-                        "Sign Up",
+                        "Log In",
                         style: TextStyle(
                           color: Colors.white,
                         ),
@@ -105,15 +102,19 @@ class _SignupFormState extends State<SignupForm> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Already have an Account?"),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        loginbutton = !loginbutton;
-                      });
-                    },
-                    child: const Text("Sign in"),
-                  )
+                  const Text("Don't have an account?"),
+                  Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          signupbutton = !signupbutton;
+                        });
+                      },
+                      child: const Text("Signup"),
+                    ),
+                  ),
+                  // Login()
                 ],
               )
             ],

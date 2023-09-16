@@ -1,98 +1,147 @@
 // todo: create Login screen here
 import 'package:flutter/material.dart';
+import 'package:peerlink/screens/login_screen/login_form.dart';
+import 'package:peerlink/screens/sign_up_screen/sign_up_screen.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
+
+  //  Function(bool) toggleLoginState=?;
+
+  // Login({required this.toggleLoginState});
 
   @override
   State<Login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> with TickerProviderStateMixin {
-  TextEditingController _textController = TextEditingController();
-  FocusNode _focusNode = FocusNode();
+bool isLoginPressed = true;
 
-  @override
-  void dispose() {
-    _textController.dispose();
-    _focusNode.dispose();
-    super.dispose();
+class _LoginState extends State<Login> with TickerProviderStateMixin {
+  // bool isLoginPressed = true;
+
+  void toggleIsLoginPressed() {
+    setState(() {
+      isLoginPressed = !isLoginPressed;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     // TabController? _tabController = TabController(length: 2, vsync: this);
+    // Initially, the Login button is pressed
+    // if (signupbutton) {
+    //   setState(() {
+    //     isLoginPressed = !isLoginPressed;
+    //   });
+    // }
+    // if (loginbutton) {
+    //   setState(() {
+    //     isLoginPressed = !isLoginPressed;
+    //   });
+    // }
+
     return Column(
       children: [
         const SizedBox(
           height: 20,
         ),
         Container(
-            height: 40,
-            width: 220,
-            decoration: BoxDecoration(
-              border: Border.all(
-                  color: Colors.orange, width: 1.0, style: BorderStyle.solid),
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Row(
-              children: [
-                OutlinedButton(
-                  onPressed: () {},
+          height: 40,
+          width: 220,
+          decoration: BoxDecoration(
+            border: Border.all(
+                color: Colors.orange, width: 1.0, style: BorderStyle.solid),
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 109,
+                child: TextButton(
+                  onPressed: () {
+                    setState(() {
+                      isLoginPressed = true; // Set the Login button as pressed
+                    });
+                  },
                   style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            30.0), // Set border radius here
-                      ),
-                    ),
-                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return Colors.orange; // Background color when pressed
+                    backgroundColor: MaterialStateColor.resolveWith(
+                      (states) {
+                        if (isLoginPressed) {
+                          return Colors.orange;
                         }
-                        return Colors.transparent; // Default background color
+                        return Colors.white;
                       },
                     ),
-                  ),
-                  child: Text("Log In"),
-                ),
-                OutlinedButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            30.0), // Set border radius here
+                        borderRadius: BorderRadius.circular(30.0),
                       ),
                     ),
-                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.pressed)) {
-                          return Colors.orange; // Background color when pressed
-                        }
-                        return Colors.transparent; // Default background color
-                      },
+                  ),
+                  child: Text(
+                    "Log In",
+                    style: TextStyle(
+                      color: isLoginPressed ? Colors.white : Colors.orange,
                     ),
                   ),
-                  child: Text("SignUp"),
                 ),
-              ],
-            )),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: TextFormField(
-              controller: _textController,
-              // focusNode: _focusNode,
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), hintText: "Enter Your ID"),
-              // enabled: true,
-              keyboardType: TextInputType.text,
-            ),
+              ),
+              SizedBox(
+                width: 109,
+                child: TextButton(
+                  onPressed: () {
+                    setState(() {
+                      isLoginPressed =
+                          false; // Set the Login button as not pressed
+                    });
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateColor.resolveWith(
+                      (states) {
+                        if (!isLoginPressed) {
+                          return Colors.orange;
+                        }
+                        return Colors.white;
+                      },
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      color: !isLoginPressed ? Colors.white : Colors.orange,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
+
+        ///here comes the login page
+        ///
+        ///
+        ///
+        // if (isLoginPressed) LoginForm();
+        // else {SignupForm(),}
+
+        isLoginPressed ? const LoginForm() : SignupForm(),
       ],
     );
   }
+
+  // Widget scrn() {
+  //   if (isLoginPressed && !signupbutton) {
+  //     return LoginForm();
+  //   } else if (!isLoginPressed && !loginbutton) {
+  //     return SignupForm();
+  //   }
+  //   else if(){
+  //     return
+  //   }
+  // }
 }
